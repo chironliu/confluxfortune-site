@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.wpilib.org/release/v2024.1.0/manifest.schema.json",
-  "name": "conflux-fortune-limited",
+  "name": "confluxfortune-site",
   "routes": [
     {
       "pattern": "www.confluxfortune.com",
