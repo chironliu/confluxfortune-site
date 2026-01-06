@@ -1,6 +1,12 @@
 {
   "$schema": "https://schemas.wpilib.org/release/v2024.1.0/manifest.schema.json",
   "name": "conflux-fortune-limited",
+  "routes": [
+    {
+      "pattern": "www.confluxfortune.com",
+      "custom_domain": true
+    }
+  ],
   "compatibility_date": "2026-01-06",
   "assets": {
     "directory": "./dist"
