@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, Briefcase, TrendingUp, Cpu, Globe, Mail, MapPin, ChevronRight, Menu, X, ArrowDownRight } from 'lucide-react';
+import { Shield, Briefcase, TrendingUp, Cpu, Globe, Mail, MapPin, Menu, X, ArrowDownRight } from 'lucide-react';
 import { translations } from './translations';
 import { Language } from './types';
 
@@ -18,7 +18,7 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle: string }
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
-      className="text-[10px] md:text-[12px] tracking-ultra uppercase text-[#D4AF37]/50 font-bold"
+      className="text-xs md:text-sm tracking-ultra uppercase text-[#D4AF37]/70 font-bold text-glow"
     >
       {subtitle}
     </motion.h3>
@@ -62,26 +62,34 @@ const Navbar = ({ lang, setLang, content }: { lang: Language, setLang: (l: Langu
 
         {/* Desktop Menu - 精细化字体显示 */}
         <div className="hidden lg:flex items-center gap-16 text-xs font-bold tracking-ultra uppercase">
-          {['about', 'services', 'contact'].map((item) => (
-            <a
+          {['about', 'services', 'contact'].map((item, index) => (
+            <motion.a
               key={item}
               href={`#${item}`}
-              className="text-white/40 hover:text-[#D4AF37] transition-all duration-300 relative group overflow-hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="text-white/60 hover:text-[#D4AF37] transition-all duration-300 relative group overflow-hidden"
             >
               {content.nav[item as keyof typeof content.nav]}
               <span className="absolute bottom-[-4px] left-0 w-full h-[1px] bg-[#D4AF37] transform translate-x-[-105%] group-hover:translate-x-0 transition-transform duration-500"></span>
-            </a>
+              <span className="absolute inset-0 bg-[#D4AF37]/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+            </motion.a>
           ))}
 
           <div className="flex items-center gap-8 ml-4 border-l border-white/10 pl-16">
             {(['EN', 'TC'] as Language[]).map((l) => (
-              <button
+              <motion.button
                 key={l}
                 onClick={() => setLang(l)}
-                className={`text-sm transition-all duration-300 font-bold ${lang === l ? 'text-[#D4AF37]' : 'text-white/20 hover:text-white/50'}`}
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className={`text-sm transition-all duration-300 font-bold ${lang === l ? 'text-[#D4AF37]' : 'text-white/40 hover:text-white/60'}`}
               >
                 {l === 'TC' ? '繁中' : 'EN'}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -127,29 +135,47 @@ const ServiceCard = ({ icon: Icon, title, desc, index }: { icon: any, title: str
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    whileHover={{ y: -8, scale: 1.01 }}
-    className="group relative p-12 rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-white/[0.04] to-transparent hover:border-[#D4AF37]/30 transition-all duration-700 overflow-hidden min-h-[480px] flex flex-col justify-between shadow-2xl"
+    whileHover={{ y: -10, scale: 1.02, boxShadow: '0 25px 80px rgba(212, 175, 55, 0.3)' }}
+    className="group relative p-12 rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-white/[0.06] to-transparent hover:border-[#D4AF37]/60 transition-all duration-700 overflow-hidden min-h-[480px] flex flex-col justify-between shadow-2xl"
   >
-    <div className="absolute -top-12 -right-12 p-16 opacity-[0.02] group-hover:opacity-[0.08] transition-all duration-700 group-hover:scale-125">
+    {/* 装饰性背景网格 */}
+    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_40%,rgba(212,175,55,0.04)_50%,transparent_60%)] bg-[length:12px_12px] group-hover:opacity-150 transition-opacity duration-700" />
+    <motion.div
+      initial={{ scale: 1, opacity: 0.03 }}
+      whileHover={{ scale: 1.3, opacity: 0.15 }}
+      transition={{ duration: 0.7 }}
+      className="absolute -top-12 -right-12 p-16"
+    >
       <Icon size={240} />
-    </div>
+    </motion.div>
 
     <div className="space-y-10 relative z-10">
-      <div className="w-20 h-20 rounded-3xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center group-hover:border-[#D4AF37]/40 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        transition={{ duration: 0.5 }}
+        className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#0a0a0a] to-[#0f0f0f] border border-white/10 flex items-center justify-center group-hover:border-[#D4AF37]/60 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_50px_rgba(212,175,55,0.3)]"
+      >
         <Icon className="text-[#D4AF37] group-hover:scale-110 transition-transform duration-700" size={32} />
-      </div>
+      </motion.div>
       <div>
-        <h4 className="text-3xl font-serif font-medium mb-6 group-hover:text-white transition-colors duration-500 text-balance hyphens-none">{title}</h4>
-        <p className="text-white/60 text-[15px] leading-relaxed font-light group-hover:text-white/70 transition-colors duration-500 text-balance">
+        <h4 className="text-3xl font-serif font-medium mb-6 group-hover:text-white transition-colors duration-500 text-balance hyphens-none text-white/90">{title}</h4>
+        <p className="text-white/70 text-[15px] leading-relaxed font-light group-hover:text-white/80 transition-colors duration-500 text-balance">
           {desc}
         </p>
       </div>
     </div>
 
     <div className="relative z-10 pt-10">
-      <button className="flex items-center gap-4 text-xs uppercase tracking-ultra text-[#D4AF37] font-black group-hover:gap-6 transition-all duration-500">
-        Discover Expertise <ArrowDownRight size={14} />
-      </button>
+      <motion.button
+        whileHover={{ x: 6 }}
+        whileTap={{ scale: 0.95 }}
+        className="flex items-center gap-4 text-xs uppercase tracking-ultra text-[#D4AF37] font-black group-hover:gap-6 transition-all duration-500 relative overflow-hidden"
+      >
+        <span className="absolute inset-0 bg-[#D4AF37]/15 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+        <span className="relative z-10 flex items-center gap-4">
+          Discover Expertise <ArrowDownRight size={14} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500" />
+        </span>
+      </motion.button>
     </div>
   </motion.div>
 );
@@ -161,18 +187,25 @@ export default function App() {
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, restDelta: 0.001 });
 
-  const heroScale = useTransform(smoothProgress, [0, 0.4], [1, 1.2]);
-  const heroOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
   const heroBlur = useTransform(smoothProgress, [0, 0.2], [0, 10]);
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden selection:bg-[#D4AF37] selection:text-black">
-      <div className="bg-noise fixed inset-0 pointer-events-none z-[100]" />
+      {/* 全局噪点纹理 - 降低透明度以减少干扰 */}
+      <div className="bg-noise fixed inset-0 pointer-events-none z-[100]" style={{ opacity: '0.02' }} />
+
+      {/* 装饰性渐变网格 - 仅在 Hero Section 之后显示 */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-10">
+        <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-br from-[#D4AF37]/5 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-bl from-[#D4AF37]/5 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
+        <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-transparent via-[#D4AF37]/20 to-transparent" />
+      </div>
 
       <Navbar lang={lang} setLang={setLang} content={t} />
 
       {/* Hero Section - 极致的排版与空间感 */}
-      <section className="relative h-[150vh] flex flex-col items-center overflow-visible">
+      <section className="relative h-screen flex flex-col items-center overflow-hidden">
         <div className="sticky top-0 w-full h-screen overflow-hidden">
           <motion.div
             style={{
@@ -182,63 +215,114 @@ export default function App() {
             }}
             className="absolute inset-0 z-0"
           >
-            <img
-              src="/images/phone_video_poster.CZl_dEt9.jpg"
-              alt="Metropolitan skyline at dusk, representing the global reach and sophisticated vision of Conflux Fortune"
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
               className="w-full h-full object-cover"
-              width="2070"
-              height="1380"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
-            <div className="absolute inset-0 bg-black/30" />
+              poster="/images/phone_video_poster.CZl_dEt9.jpg"
+            >
+              <source src="/media/cg_hk_bg.mp4" type="video/mp4" />
+              {/* 备用图片 */}
+              <img
+                src="/images/phone_video_poster.CZl_dEt9.jpg"
+                alt="Metropolitan skyline at dusk, representing the global reach and sophisticated vision of Conflux Fortune"
+                className="w-full h-full object-cover"
+                width="2070"
+                height="1380"
+                loading="eager"
+              />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
           </motion.div>
 
           <div className="relative z-10 w-full h-full flex items-center justify-center pt-20">
-            <div className="max-w-[1600px] mx-auto px-8 text-center">
+            <div className="max-w-[1800px] mx-auto px-8 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 60, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-12"
+                className="space-y-16"
               >
-                <div className="inline-flex items-center gap-4 px-8 py-3 border border-white/5 rounded-full backdrop-blur-xl mb-6 shadow-2xl">
-                  <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                  <span className="text-[10px] tracking-ultra uppercase text-[#D4AF37] font-black text-balance">Hong Kong • Greater Bay Area</span>
+                <div className="inline-flex items-center gap-4 px-10 py-4 border border-[#D4AF37]/30 rounded-full backdrop-blur-xl mb-8 shadow-[0_0_40px_rgba(212,175,55,0.1)] bg-black/30">
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]"
+                  />
+                  <span className="text-xs tracking-ultra uppercase text-[#D4AF37] font-black text-balance">Hong Kong • Greater Bay Area</span>
                 </div>
 
-                <h1 className="font-serif tracking-tight leading-[0.85] font-medium" style={{ fontSize: 'clamp(2.5rem, 10vw, 12rem)' }}>
+                <h1 className="font-serif tracking-tight leading-[0.85] font-medium" style={{ fontSize: 'clamp(2.5rem, 11vw, 13rem)' }}>
                   <GoldText className="pb-8">{t.hero.title}</GoldText>
                 </h1>
 
-                <p className="text-xl md:text-3xl text-white/70 font-light max-w-4xl mx-auto leading-relaxed-custom text-balance px-4 text-sharp">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="text-xl md:text-4xl text-white/80 font-light max-w-5xl mx-auto leading-relaxed-custom text-balance px-6 text-sharp"
+                >
                   {t.hero.subtitle}
-                </p>
+                </motion.p>
 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-10 pt-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  className="flex flex-col md:flex-row items-center justify-center gap-12 pt-16"
+                >
                   <motion.button
-                    whileHover={{ scale: 1.05, letterSpacing: '0.6em' }}
+                    whileHover={{ scale: 1.05, letterSpacing: '0.65em', boxShadow: '0 0 100px rgba(212, 175, 55, 0.5)' }}
                     whileTap={{ scale: 0.95 }}
-                    className="group px-16 py-6 border border-[#D4AF37]/50 text-[#D4AF37] rounded-full uppercase tracking-ultra text-[10px] font-black transition-all duration-700 hover:bg-[#D4AF37] hover:text-black shadow-[0_0_50px_rgba(212,175,55,0.1)] flex items-center gap-5"
+                    className="group px-20 py-7 border border-[#D4AF37]/70 text-[#D4AF37] rounded-full uppercase tracking-ultra text-xs font-black transition-all duration-700 hover:bg-[#D4AF37] hover:text-black shadow-[0_0_80px_rgba(212,175,55,0.25)] flex items-center gap-6 relative overflow-hidden"
                   >
-                    {t.hero.cta}
-                    <ArrowDownRight size={18} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500" />
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700" />
+                    <span className="relative z-10 flex items-center gap-6">
+                      {t.hero.cta}
+                      <ArrowDownRight size={20} className="group-hover:translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-500" />
+                    </span>
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
             </div>
           </div>
 
           {/* 装饰线条 */}
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6">
-            <div className="w-[1px] h-32 bg-gradient-to-b from-[#D4AF37]/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full max-w-[400px]"
+            >
+              {/* 双线装饰 - 金色主题 */}
+              <div className="flex items-center justify-center gap-4">
+                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-[#D4AF37]" />
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-2 h-2 rounded-full bg-[#D4AF37]"
+                />
+                <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent via-[#D4AF37]/60 to-[#D4AF37]" />
+              </div>
+              {/* 辅助细线 */}
+              <div className="w-full h-[1px] bg-gradient-to-b from-[#D4AF37]/20 via-[#D4AF37]/5 to-transparent mt-2" />
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* About Section - 强化大空间与对比度 */}
-      <section id="about" className="py-64 px-8 md:px-24 relative">
-        <div className="max-w-[1500px] mx-auto grid lg:grid-cols-12 gap-32 items-center">
+      <section id="about" className="py-32 px-8 md:px-24 relative">
+        {/* 装饰性背景 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#050505] via-black to-[#080808]" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_0%_50%,#D4AF3703_0%,transparent_50%)]" />
+
+        <div className="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-40 items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -250,27 +334,27 @@ export default function App() {
               <img
                 src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=800"
                 alt="Modern corporate office interior representing Conflux Fortune's sophisticated approach to wealth management and fintech innovation in Hong Kong"
-                className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[3s]"
+                className="w-full h-full object-cover opacity-35 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[3s]"
                 width="800"
                 height="1000"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
             </div>
-            <div className="absolute -bottom-16 -right-16 w-96 h-96 border border-[#D4AF37]/30 rounded-[3rem] backdrop-blur-3xl p-16 flex flex-col justify-end bg-gradient-to-br from-black/30 via-black/20 to-transparent shadow-3xl">
-              <Globe className="text-[#D4AF37] mb-8 animate-spin-slow" size={64} strokeWidth={1} />
-              <span className="text-[#D4AF37] font-serif text-5xl mb-4 tracking-tighter leading-none">Heritage</span>
-              <span className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Global Asset Protection</span>
+            <div className="absolute -bottom-20 -right-20 w-[420px] h-[420px] border border-[#D4AF37]/50 rounded-[3.5rem] backdrop-blur-3xl p-20 flex flex-col justify-end bg-gradient-to-br from-black/50 via-black/40 to-transparent shadow-[0_25px_80px_rgba(212,175,55,0.2)]">
+              <Globe className="text-[#D4AF37] mb-10 animate-spin-slow" size={72} strokeWidth={1} />
+              <span className="text-[#D4AF37] font-serif text-6xl mb-5 tracking-tighter leading-none">Heritage</span>
+              <span className="text-white/60 text-xs uppercase tracking-ultra font-black">Global Asset Protection</span>
             </div>
           </motion.div>
 
-          <div className="lg:col-span-7 space-y-14">
+          <div className="lg:col-span-7 space-y-16">
             <SectionHeading title={t.nav.about} subtitle="Our Philosophy" />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-4xl text-white/80 leading-tight font-serif italic font-light text-balance"
+              className="text-2xl md:text-4xl text-white/90 leading-tight font-serif italic font-light text-balance"
             >
               {lang === 'TC'
                 ? '以香港之名，匯聚大灣區財富與科技的未來。'
@@ -281,7 +365,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-white/60 leading-relaxed-custom font-light body-text text-sharp hyphens-none"
+              className="text-xl text-white/70 leading-relaxed-custom font-light body-text text-sharp hyphens-none"
             >
               {lang === 'TC'
                 ? '灣匯財富致力於構建新一代金融+科技生態，我們以深厚的行業底蘊融合先進的數字技術，為大中華區及全球高淨值客戶提供精準的資產配置建議。在瞬息萬變的全球市場中，我們是您最堅實的專業後盾。'
@@ -291,11 +375,11 @@ export default function App() {
             <div className="grid grid-cols-2 gap-20 pt-12 border-t border-white/5">
               <div className="space-y-4">
                 <h5 className="text-6xl font-serif text-gold tracking-tighter">A+</h5>
-                <p className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Security Rating</p>
+                <p className="text-white/50 text-xs uppercase tracking-ultra font-black">Security Rating</p>
               </div>
               <div className="space-y-4">
                 <h5 className="text-6xl font-serif text-gold tracking-tighter">∞</h5>
-                <p className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Digital Scalability</p>
+                <p className="text-white/50 text-xs uppercase tracking-ultra font-black">Digital Scalability</p>
               </div>
             </div>
           </div>
@@ -303,20 +387,22 @@ export default function App() {
       </section>
 
       {/* Expertise Section - 精细化的卡片排版 */}
-      <section id="services" className="py-64 px-8 md:px-24 bg-gradient-to-b from-[#0a0a0a] via-[#080808] to-[#030303] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3708_0%,transparent_50%)]" />
-        <div className="max-w-[1600px] mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-32 gap-16">
+      <section id="services" className="py-64 px-8 md:px-24 bg-gradient-to-b from-[#080808] via-[#060606] to-[#040404] relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-15" />
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3710_0%,transparent_60%)]" />
+        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_100%,#D4AF3708_0%,transparent_50%)]" />
+        <div className="max-w-[1800px] mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-40 gap-20">
             <SectionHeading title={t.nav.services} subtitle="Strategic Pillars" />
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="max-w-md text-white/40 text-xs leading-relaxed-custom border-l border-[#D4AF37]/20 pl-10 mb-6 font-medium italic text-balance"
+              className="max-w-md text-white/50 text-xs leading-relaxed-custom border-l border-[#D4AF37]/30 pl-12 mb-6 font-medium italic text-balance"
             >
               Our multidisciplinary approach combines traditional trust with digital efficiency, creating an impenetrable fortress for your family's future.
             </motion.div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
               { icon: Shield, id: 'insurance' },
               { icon: Briefcase, id: 'familyOffice' },
@@ -337,22 +423,29 @@ export default function App() {
 
       {/* Contact Section - 增强沉浸感 */}
       <section id="contact" className="py-64 px-8 md:px-24 relative">
-        <div className="max-w-[1500px] mx-auto">
-          <div className="relative group p-16 md:p-32 rounded-[5rem] border border-white/5 bg-gradient-to-br from-[#080808] to-black overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)]">
-            <div className="absolute inset-0 bg-noise opacity-[0.03]" />
-            <div className="absolute top-0 right-0 w-2/3 h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3708_0%,transparent_70%)] pointer-events-none" />
+        {/* 装饰性背景 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#060606] to-black" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="max-w-[1700px] mx-auto relative z-10">
+          <div className="relative group p-20 md:p-40 rounded-[5rem] border border-white/8 bg-gradient-to-br from-[#0a0a0a] via-black to-[#050505] overflow-hidden shadow-[0_0_120px_rgba(0,0,0,1)]">
+            <div className="absolute inset-0 bg-noise opacity-[0.04]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/4 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 w-2/3 h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3712_0%,transparent_70%)] pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col xl:flex-row items-start justify-between gap-32">
-              <div className="space-y-16 flex-1">
+            <div className="relative z-10 flex flex-col xl:flex-row items-start justify-between gap-40">
+              <div className="space-y-20 flex-1">
                 <SectionHeading title={t.nav.contact} subtitle="Join the Elite" />
-                <div className="space-y-12">
+                <div className="space-y-14">
                   <div className="flex items-center gap-10 group/item cursor-pointer">
-                    <div className="w-20 h-20 rounded-[2rem] border border-white/5 flex items-center justify-center group-hover/item:border-[#D4AF37]/40 transition-all duration-700 shadow-3xl bg-black">
-                      <Mail className="text-[#D4AF37]" size={28} />
-                    </div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="w-20 h-20 rounded-[2rem] border border-white/5 flex items-center justify-center group-hover/item:border-[#D4AF37]/50 transition-all duration-700 shadow-3xl bg-black"
+                    >
+                      <Mail className="text-[#D4AF37] group-hover:scale-110 transition-transform duration-500" size={28} />
+                    </motion.div>
                     <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-ultra text-white/40 font-black mb-2">Private Direct</span>
-                      <a href={`mailto:${t.footer.contact}`} className="text-2xl md:text-4xl text-white/80 hover:text-white transition-all duration-500 font-serif font-light">{t.footer.contact}</a>
+                      <span className="text-xs uppercase tracking-ultra text-white/50 font-black mb-2">Private Direct</span>
+                      <a href={`mailto:${t.footer.contact}`} className="text-2xl md:text-4xl text-white/90 hover:text-[#D4AF37] transition-all duration-500 font-serif font-light relative group-hover:tracking-wider">{t.footer.contact}</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-10">
@@ -360,8 +453,8 @@ export default function App() {
                       <MapPin className="text-[#D4AF37]" size={28} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-ultra text-white/40 font-black mb-2">Global Headquarters</span>
-                      <p className="text-2xl text-white/80 font-serif font-light">{t.footer.address}</p>
+                      <span className="text-xs uppercase tracking-ultra text-white/50 font-black mb-2">Global Headquarters</span>
+                      <p className="text-2xl text-white/90 font-serif font-light">{t.footer.address}</p>
                     </div>
                   </div>
                 </div>
@@ -371,26 +464,33 @@ export default function App() {
                 <form className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Full Name</label>
-                    <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" aria-label="Full Name" />
+                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/70 ml-6 font-black">Full Name</label>
+                    <motion.input
+                      whileFocus={{ scale: 1.02 }}
+                      type="text" className="w-full bg-white/[0.03] border border-white/8 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/50 focus:ring-2 focus:ring-[#D4AF37]/30 transition-all duration-300 text-white placeholder:text-white/8 shadow-inner" aria-label="Full Name" placeholder="Enter your name" />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Secure Line</label>
-                    <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" aria-label="Secure Line" />
+                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/70 ml-6 font-black">Secure Line</label>
+                    <motion.input
+                      whileFocus={{ scale: 1.02 }}
+                      type="text" className="w-full bg-white/[0.03] border border-white/8 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/50 focus:ring-2 focus:ring-[#D4AF37]/30 transition-all duration-300 text-white placeholder:text-white/8 shadow-inner" aria-label="Secure Line" placeholder="Enter your contact number" />
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Inquiry Specification</label>
-                  <textarea rows={4} className="w-full bg-white/[0.02] border border-white/5 rounded-[2rem] px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" placeholder="Tell us about your strategic vision..." aria-label="Inquiry Specification" />
-                  </div>
+                  <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/70 ml-6 font-black">Inquiry Specification</label>
+                  <motion.textarea
+                    whileFocus={{ scale: 1.02 }}
+                    rows={4} className="w-full bg-white/[0.03] border border-white/8 rounded-[2rem] px-8 py-6 outline-none focus:border-[#D4AF37]/50 focus:ring-2 focus:ring-[#D4AF37]/30 transition-all duration-300 text-white placeholder:text-white/8 shadow-inner" aria-label="Inquiry Specification" placeholder="Tell us about your strategic vision..." />
+                </div>
                   <motion.button
-                    whileHover={{ scale: 1.02, brightness: 1.2 }}
+                    whileHover={{ scale: 1.02, brightness: 1.15, boxShadow: '0 20px 60px rgba(212, 175, 55, 0.4)' }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full py-8 bg-gradient-to-r from-[#D4AF37] via-[#FFF5B7] to-[#8A6D3B] text-black font-black uppercase tracking-ultra text-[11px] rounded-3xl shadow-[0_20px_60px_rgba(212,175,55,0.2)] transition-all"
+                    className="w-full py-8 bg-gradient-to-r from-[#D4AF37] via-[#FFF5B7] to-[#8A6D3B] text-black font-black uppercase tracking-ultra text-sm rounded-3xl shadow-[0_20px_60px_rgba(212,175,55,0.3)] transition-all relative overflow-hidden group"
                     type="submit"
                     aria-label="Submit form to initiate connection"
                   >
-                    Initiate Connection
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    <span className="relative z-10">Initiate Connection</span>
                   </motion.button>
                 </form>
               </div>
@@ -406,16 +506,16 @@ export default function App() {
             <img
               src="/images/cf-favicon.png"
               alt="Conflux Fortune LIMITED Logo"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain group-hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-shadow duration-500"
               loading="lazy"
             />
           </div>
 
           <div className="flex flex-col items-center gap-6">
-            <p className="text-white/40 text-xs uppercase tracking-ultra font-bold">{t.footer.rights}</p>
+            <p className="text-white/50 text-xs uppercase tracking-ultra font-bold">{t.footer.rights}</p>
           </div>
 
-          <div className="flex gap-12 text-white/40 text-xs uppercase tracking-ultra font-black">
+          <div className="flex gap-12 text-white/50 text-xs uppercase tracking-ultra font-black">
             <a href="#" className="hover:text-[#D4AF37] transition-all">Privacy Strategy</a>
             <a href="#" className="hover:text-[#D4AF37] transition-all">Risk Disclaimer</a>
           </div>
