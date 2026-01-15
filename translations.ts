@@ -33,7 +33,7 @@ export const translations: Record<'EN' | 'TC', TranslationSchema> = {
     },
     footer: {
       address: "Hong Kong Finance Center, Central, Hong Kong",
-      contact: "contract@confluxfortune.com",
+      contact: "contact@confluxfortune.com",
       rights: "© 2024 Conflux Fortune LIMITED. All Rights Reserved."
     }
   },
@@ -68,7 +68,7 @@ export const translations: Record<'EN' | 'TC', TranslationSchema> = {
     },
     footer: {
       address: "香港中環金融中心大廈",
-      contact: "contract@confluxfortune.com",
+      contact: "contact@confluxfortune.com",
       rights: "© 2024 灣匯財富 Conflux Fortune LIMITED. 版權所有。"
     }
   }

@@ -1,0 +1,15 @@
+# robots.txt for Conflux Fortune LIMITED
+# https://confluxfortune.com/
+
+User-agent: *
+Allow: /
+
+# Disallow certain directories if any
+# Disallow: /private/
+# Disallow: /admin/
+
+# Allow search engines to crawl sitemap
+Sitemap: https://confluxfortune.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

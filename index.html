@@ -1,105 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="zh-HK">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Conflux Fortune LIMITED | 灣匯財富</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-      body {
-        background-color: #000000;
-        color: #ffffff;
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      /* 高级感排版：调整黄金文本的渐变节点，使其更具流动金属感 */
-      .text-gold {
-        background: linear-gradient(
-          135deg,
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Conflux Fortune | 灣匯財富</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Conflux Fortune LIMITED (灣匯財富) is a Hong Kong-based financial and technology convergence company providing asset protection, family office services, investment funds, and fintech solutions for high-net-worth clients in the Greater Bay Area." />
+  <meta name="keywords"
+    content="Conflux Fortune, 灣匯財富, Hong Kong Finance, Greater Bay Area, Family Office, Asset Protection, Investment Funds, Fintech, Wealth Management, Hong Kong Limited" />
+  <meta name="author" content="Conflux Fortune LIMITED" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://confluxfortune.com/" />
+
+  <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://confluxfortune.com/" />
+  <meta property="og:title" content="Conflux Fortune|灣匯財富" />
+  <meta property="og:description"
+    content="Conflux Fortune LIMITED (灣匯財富) is a Hong Kong-based financial and technology convergence company providing asset protection, family office services, investment funds, and fintech solutions for high-net-worth clients in the Greater Bay Area." />
+  <meta property="og:image" content="https://confluxfortune.com/og-image.jpg" />
+  <meta property="og:locale" content="zh_HK" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:site_name" content="Conflux Fortune" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://confluxfortune.com/" />
+  <meta name="twitter:title" content="Conflux Fortune | 灣匯財富" />
+  <meta name="twitter:description"
+    content="Conflux Fortune LIMITED (灣匯財富) is a Hong Kong-based financial and technology convergence company providing asset protection, family office services, investment funds, and fintech solutions for high-net-worth clients in the Greater Bay Area." />
+  <meta name="twitter:image" content="https://confluxfortune.com/twitter-card.jpg" />
+
+  <!-- Additional SEO Tags -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* 高级感排版：调整黄金文本的渐变节点，使其更具流动金属感 */
+    .text-gold {
+      background: linear-gradient(135deg,
           #8A6D3B 0%,
           #D4AF37 22%,
           #FFF5B7 45%,
           #E2B955 50%,
           #FFF5B7 55%,
           #D4AF37 78%,
-          #8A6D3B 100%
-        );
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: shine 8s linear infinite;
-      }
-      
-      @keyframes shine {
-        to {
-          background-position: 200% center;
-        }
-      }
+          #8A6D3B 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 8s linear infinite;
+    }
 
-      /* 模拟金属微光反射 */
-      .metallic-glow::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: inherit;
-        filter: blur(20px);
-        opacity: 0.15;
-        z-index: -1;
+    @keyframes shine {
+      to {
+        background-position: 200% center;
       }
+    }
 
-      /* 物理噪点纹理 */
-      .bg-noise {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.05;
-      }
+    /* 模拟金属微光反射 */
+    .metallic-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      filter: blur(20px);
+      opacity: 0.15;
+      z-index: -1;
+    }
 
-      /* 顺滑滚动体验 */
-      html {
-        scroll-behavior: smooth;
-      }
-      
-      /* 自定义滚动条：极简金色设计 */
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #000;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, transparent, #D4AF37, transparent);
-        border-radius: 10px;
-      }
+    /* 物理噪点纹理 */
+    .bg-noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+    }
 
-      /* 深度空间背景 */
-      .bg-mesh {
-        background: radial-gradient(circle at 50% -10%, #151515 0%, #000 80%);
-      }
+    /* 顺滑滚动体验 */
+    html {
+      scroll-behavior: smooth;
+    }
 
-      /* 优化排版类 */
-      .tracking-ultra {
-        letter-spacing: 0.5em;
-      }
-      .leading-relaxed-custom {
-        line-height: 1.8;
-      }
-      .text-balance {
-        text-wrap: balance;
-      }
-      
-      /* 文本边缘清晰度优化 */
-      .text-sharp {
-        text-shadow: 0 0 1px rgba(255,255,255,0.1);
-      }
-    </style>
-    <script type="importmap">
+    /* 自定义滚动条：极简金色设计 */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, transparent, #D4AF37, transparent);
+      border-radius: 10px;
+    }
+
+    /* 深度空间背景 */
+    .bg-mesh {
+      background: radial-gradient(circle at 50% -10%, #151515 0%, #000 80%);
+    }
+
+    /* 优化排版类 */
+    .tracking-ultra {
+      letter-spacing: 0.5em;
+    }
+
+    .leading-relaxed-custom {
+      line-height: 1.8;
+    }
+
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    /* 文本边缘清晰度优化 */
+    .text-sharp {
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+  </style>
+  <script type="importmap">
     {
       "imports": {
         "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
@@ -111,9 +157,104 @@
     }
     </script>
   <link rel="stylesheet" href="/index.css">
+
+  <!-- Structured Data / JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Conflux Fortune LIMITED",
+    "alternateName": "灣匯財富",
+    "url": "https://confluxfortune.com/",
+    "logo": "https://confluxfortune.com/logo.png",
+    "description": "Conflux Fortune LIMITED is a Hong Kong-based financial and technology convergence company providing asset protection, family office services, investment funds, and fintech solutions for high-net-worth clients in the Greater Bay Area.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Hong Kong",
+      "addressLocality": "Hong Kong",
+      "addressCountry": "HK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@confluxfortune.com",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/conflux-fortune"
+    ],
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "Hong Kong"
+      },
+      {
+        "@type": "Country",
+        "name": "China"
+      },
+      {
+        "@type": "Country",
+        "name": "Greater Bay Area"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Conflux Fortune LIMITED",
+    "alternateName": "灣匯財富",
+    "url": "https://confluxfortune.com/",
+    "description": "Hong Kong-based financial and technology convergence company providing asset protection, family office services, investment funds, and fintech solutions",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://confluxfortune.com/?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": [
+      "zh-HK",
+      "en-GB"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Conflux Fortune LIMITED",
+    "alternateName": "灣匯財富",
+    "image": "https://confluxfortune.com/og-image.jpg",
+    "url": "https://confluxfortune.com/",
+    "telephone": "+852-XXXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Hong Kong",
+      "addressLocality": "Hong Kong",
+      "addressRegion": "Hong Kong",
+      "addressCountry": "HK"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "priceRange": "$$$"
+  }
+  </script>
 </head>
-  <body class="bg-mesh">
-    <div id="root"></div>
+
+<body class="bg-mesh">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
