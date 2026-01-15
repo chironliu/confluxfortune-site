@@ -45,7 +45,7 @@ const Navbar = ({ lang, setLang, content }: { lang: Language, setLang: (l: Langu
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 px-6 md:px-20 py-10 ${isScrolled ? 'bg-black/80 backdrop-blur-2xl border-b border-white/5 py-6' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 px-6 md:px-20 py-4 md:py-5 ${isScrolled ? 'bg-black/80 backdrop-blur-2xl border-b border-white/5 py-3' : 'bg-transparent'}`}>
       <div className="max-w-[1920px] mx-auto flex items-center justify-between">
         <motion.div
           initial={{ opacity: 0 }}
@@ -53,9 +53,9 @@ const Navbar = ({ lang, setLang, content }: { lang: Language, setLang: (l: Langu
           className="flex items-center gap-8 group cursor-pointer"
         >
           <img
-            src="/images/title-logo.png"
+            src="/images/cf-favicon.png"
             alt="Conflux Fortune LIMITED Logo"
-            className="h-48 md:h-64 w-auto object-contain group-hover:opacity-100 opacity-90 transition-all duration-500"
+            className="h-16 md:h-20 w-auto object-contain group-hover:opacity-100 opacity-90 transition-all duration-500"
             loading="eager"
           />
         </motion.div>
@@ -87,7 +87,12 @@ const Navbar = ({ lang, setLang, content }: { lang: Language, setLang: (l: Langu
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-white/60" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button
+          className="lg:hidden text-white/60"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-label="Toggle navigation menu"
+        >
           {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
@@ -101,9 +106,9 @@ const Navbar = ({ lang, setLang, content }: { lang: Language, setLang: (l: Langu
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed inset-0 top-0 left-0 bg-black z-40 flex flex-col items-center justify-center gap-12 uppercase tracking-ultra text-xs lg:hidden"
           >
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/60 text-lg">{content.nav.about}</a>
-            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/60 text-lg">{content.nav.services}</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/60 text-lg">{content.nav.contact}</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/70 text-lg">{content.nav.about}</a>
+            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/70 text-lg">{content.nav.services}</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold text-white/70 text-lg">{content.nav.contact}</a>
             <div className="flex gap-12 mt-12 text-[#D4AF37] border-t border-white/10 pt-12">
               <button onClick={() => { setLang('EN'); setMobileMenuOpen(false); }} className="text-xl font-bold">EN</button>
               <button onClick={() => { setLang('TC'); setMobileMenuOpen(false); }} className="text-xl font-bold">繁中</button>
@@ -122,7 +127,7 @@ const ServiceCard = ({ icon: Icon, title, desc, index }: { icon: any, title: str
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    whileHover={{ y: -20, scale: 1.02 }}
+    whileHover={{ y: -8, scale: 1.01 }}
     className="group relative p-12 rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-white/[0.04] to-transparent hover:border-[#D4AF37]/30 transition-all duration-700 overflow-hidden min-h-[480px] flex flex-col justify-between shadow-2xl"
   >
     <div className="absolute -top-12 -right-12 p-16 opacity-[0.02] group-hover:opacity-[0.08] transition-all duration-700 group-hover:scale-125">
@@ -134,15 +139,15 @@ const ServiceCard = ({ icon: Icon, title, desc, index }: { icon: any, title: str
         <Icon className="text-[#D4AF37] group-hover:scale-110 transition-transform duration-700" size={32} />
       </div>
       <div>
-        <h4 className="text-3xl font-serif font-medium mb-6 group-hover:text-white transition-colors duration-500">{title}</h4>
-        <p className="text-white/40 text-[15px] leading-relaxed font-light group-hover:text-white/70 transition-colors duration-500">
+        <h4 className="text-3xl font-serif font-medium mb-6 group-hover:text-white transition-colors duration-500 text-balance hyphens-none">{title}</h4>
+        <p className="text-white/60 text-[15px] leading-relaxed font-light group-hover:text-white/70 transition-colors duration-500 text-balance">
           {desc}
         </p>
       </div>
     </div>
 
     <div className="relative z-10 pt-10">
-      <button className="flex items-center gap-4 text-[10px] uppercase tracking-ultra text-[#D4AF37] font-black group-hover:gap-6 transition-all duration-500">
+      <button className="flex items-center gap-4 text-xs uppercase tracking-ultra text-[#D4AF37] font-black group-hover:gap-6 transition-all duration-500">
         Discover Expertise <ArrowDownRight size={14} />
       </button>
     </div>
@@ -199,14 +204,14 @@ export default function App() {
               >
                 <div className="inline-flex items-center gap-4 px-8 py-3 border border-white/5 rounded-full backdrop-blur-xl mb-6 shadow-2xl">
                   <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                  <span className="text-[10px] tracking-ultra uppercase text-[#D4AF37] font-black">Hong Kong • Greater Bay Area </span>
+                  <span className="text-[10px] tracking-ultra uppercase text-[#D4AF37] font-black text-balance">Hong Kong • Greater Bay Area</span>
                 </div>
 
-                <h1 className="text-7xl md:text-[14rem] font-serif tracking-tight leading-[0.85] font-medium">
+                <h1 className="font-serif tracking-tight leading-[0.85] font-medium" style={{ fontSize: 'clamp(2.5rem, 10vw, 12rem)' }}>
                   <GoldText className="pb-8">{t.hero.title}</GoldText>
                 </h1>
 
-                <p className="text-xl md:text-3xl text-white/50 font-light max-w-4xl mx-auto leading-relaxed-custom text-balance px-4 text-sharp">
+                <p className="text-xl md:text-3xl text-white/70 font-light max-w-4xl mx-auto leading-relaxed-custom text-balance px-4 text-sharp">
                   {t.hero.subtitle}
                 </p>
 
@@ -252,10 +257,10 @@ export default function App() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
             </div>
-            <div className="absolute -bottom-16 -right-16 w-96 h-96 border border-[#D4AF37]/20 rounded-[3rem] backdrop-blur-3xl p-16 flex flex-col justify-end bg-black/40 shadow-3xl">
+            <div className="absolute -bottom-16 -right-16 w-96 h-96 border border-[#D4AF37]/30 rounded-[3rem] backdrop-blur-3xl p-16 flex flex-col justify-end bg-gradient-to-br from-black/30 via-black/20 to-transparent shadow-3xl">
               <Globe className="text-[#D4AF37] mb-8 animate-spin-slow" size={64} strokeWidth={1} />
               <span className="text-[#D4AF37] font-serif text-5xl mb-4 tracking-tighter leading-none">Heritage</span>
-              <span className="text-white/30 text-[10px] uppercase tracking-ultra font-black">Global Asset Protection</span>
+              <span className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Global Asset Protection</span>
             </div>
           </motion.div>
 
@@ -276,7 +281,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-white/40 leading-relaxed-custom font-light body-text text-sharp"
+              className="text-xl text-white/60 leading-relaxed-custom font-light body-text text-sharp hyphens-none"
             >
               {lang === 'TC'
                 ? '灣匯財富致力於構建新一代金融+科技生態，我們以深厚的行業底蘊融合先進的數字技術，為大中華區及全球高淨值客戶提供精準的資產配置建議。在瞬息萬變的全球市場中，我們是您最堅實的專業後盾。'
@@ -286,11 +291,11 @@ export default function App() {
             <div className="grid grid-cols-2 gap-20 pt-12 border-t border-white/5">
               <div className="space-y-4">
                 <h5 className="text-6xl font-serif text-gold tracking-tighter">A+</h5>
-                <p className="text-white/30 text-[10px] uppercase tracking-ultra font-black">Security Rating</p>
+                <p className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Security Rating</p>
               </div>
               <div className="space-y-4">
                 <h5 className="text-6xl font-serif text-gold tracking-tighter">∞</h5>
-                <p className="text-white/30 text-[10px] uppercase tracking-ultra font-black">Digital Scalability</p>
+                <p className="text-white/40 text-[10px] uppercase tracking-ultra font-black">Digital Scalability</p>
               </div>
             </div>
           </div>
@@ -298,15 +303,15 @@ export default function App() {
       </section>
 
       {/* Expertise Section - 精细化的卡片排版 */}
-      <section id="services" className="py-64 px-8 md:px-24 bg-[#030303] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3705_0%,transparent_50%)]" />
+      <section id="services" className="py-64 px-8 md:px-24 bg-gradient-to-b from-[#0a0a0a] via-[#080808] to-[#030303] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_100%_0%,#D4AF3708_0%,transparent_50%)]" />
         <div className="max-w-[1600px] mx-auto relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-32 gap-16">
             <SectionHeading title={t.nav.services} subtitle="Strategic Pillars" />
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="max-w-md text-white/20 text-xs leading-relaxed-custom border-l border-[#D4AF37]/20 pl-10 mb-6 font-medium italic"
+              className="max-w-md text-white/40 text-xs leading-relaxed-custom border-l border-[#D4AF37]/20 pl-10 mb-6 font-medium italic text-balance"
             >
               Our multidisciplinary approach combines traditional trust with digital efficiency, creating an impenetrable fortress for your family's future.
             </motion.div>
@@ -346,8 +351,8 @@ export default function App() {
                       <Mail className="text-[#D4AF37]" size={28} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-ultra text-white/20 font-black mb-2">Private Direct</span>
-                      <a href={`mailto:${t.footer.contact}`} className="text-2xl md:text-4xl text-white/70 hover:text-white transition-all duration-500 font-serif font-light">{t.footer.contact}</a>
+                      <span className="text-xs uppercase tracking-ultra text-white/40 font-black mb-2">Private Direct</span>
+                      <a href={`mailto:${t.footer.contact}`} className="text-2xl md:text-4xl text-white/80 hover:text-white transition-all duration-500 font-serif font-light">{t.footer.contact}</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-10">
@@ -355,8 +360,8 @@ export default function App() {
                       <MapPin className="text-[#D4AF37]" size={28} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-ultra text-white/20 font-black mb-2">Global Headquarters</span>
-                      <p className="text-2xl text-white/70 font-serif font-light">{t.footer.address}</p>
+                      <span className="text-xs uppercase tracking-ultra text-white/40 font-black mb-2">Global Headquarters</span>
+                      <p className="text-2xl text-white/80 font-serif font-light">{t.footer.address}</p>
                     </div>
                   </div>
                 </div>
@@ -365,23 +370,25 @@ export default function App() {
               <div className="flex-1 w-full max-w-xl">
                 <form className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/50 ml-6 font-black">Full Name</label>
-                      <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/30 transition-all duration-700 text-white placeholder:text-white/5 shadow-inner" />
-                    </div>
-                    <div className="space-y-3">
-                      <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/50 ml-6 font-black">Secure Line</label>
-                      <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/30 transition-all duration-700 text-white placeholder:text-white/5 shadow-inner" />
-                    </div>
+                  <div className="space-y-3">
+                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Full Name</label>
+                    <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" aria-label="Full Name" />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/50 ml-6 font-black">Inquiry Specification</label>
-                    <textarea rows={4} className="w-full bg-white/[0.02] border border-white/5 rounded-[2rem] px-8 py-6 outline-none focus:border-[#D4AF37]/30 transition-all duration-700 text-white placeholder:text-white/5 shadow-inner" placeholder="Tell us about your strategic vision..." />
+                    <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Secure Line</label>
+                    <input type="text" className="w-full bg-white/[0.02] border border-white/5 rounded-3xl px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" aria-label="Secure Line" />
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <label className="text-xs uppercase tracking-ultra text-[#D4AF37]/60 ml-6 font-black">Inquiry Specification</label>
+                  <textarea rows={4} className="w-full bg-white/[0.02] border border-white/5 rounded-[2rem] px-8 py-6 outline-none focus:border-[#D4AF37]/40 focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 text-white placeholder:text-white/5 shadow-inner" placeholder="Tell us about your strategic vision..." aria-label="Inquiry Specification" />
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.02, brightness: 1.2 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full py-8 bg-gradient-to-r from-[#D4AF37] via-[#FFF5B7] to-[#8A6D3B] text-black font-black uppercase tracking-ultra text-[11px] rounded-3xl shadow-[0_20px_60px_rgba(212,175,55,0.2)] transition-all"
+                    type="submit"
+                    aria-label="Submit form to initiate connection"
                   >
                     Initiate Connection
                   </motion.button>
@@ -397,18 +404,18 @@ export default function App() {
         <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
           <div className="flex items-center gap-6 group cursor-pointer opacity-80 hover:opacity-100 transition-all duration-700">
             <img
-              src="/images/title-logo.png"
+              src="/images/cf-favicon.png"
               alt="Conflux Fortune LIMITED Logo"
-              className="h-40 md:h-52 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain"
               loading="lazy"
             />
           </div>
 
           <div className="flex flex-col items-center gap-6">
-            <p className="text-white/20 text-xs uppercase tracking-ultra font-bold">{t.footer.rights}</p>
+            <p className="text-white/40 text-xs uppercase tracking-ultra font-bold">{t.footer.rights}</p>
           </div>
 
-          <div className="flex gap-12 text-white/20 text-xs uppercase tracking-ultra font-black">
+          <div className="flex gap-12 text-white/40 text-xs uppercase tracking-ultra font-black">
             <a href="#" className="hover:text-[#D4AF37] transition-all">Privacy Strategy</a>
             <a href="#" className="hover:text-[#D4AF37] transition-all">Risk Disclaimer</a>
           </div>

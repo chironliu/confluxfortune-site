@@ -41,8 +41,8 @@
   <meta name="format-detection" content="telephone=no" />
 
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png" />
+  <link rel="icon" type="image/png" href="/images/cf-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cf-favicon.png" />
   <link rel="manifest" href="/manifest.json" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -83,6 +83,26 @@
     @keyframes shine {
       to {
         background-position: 200% center;
+      }
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .animate-pulse {
+        animation: none !important;
+      }
+
+      .animate-spin-slow {
+        animation: none !important;
       }
     }
 
