@@ -613,14 +613,13 @@ export default function App() {
         </div>
       </footer>
       {/* TradingView Ticker Tape - Fixed Bottom Right */}
-      <div className="fixed bottom-6 right-6 z-[9999] w-full max-w-[600px] h-[84px] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] border border-[#D4AF37]/20 bg-black/90 backdrop-blur-xl">
+      <div className="fixed bottom-6 right-6 z-[9999] w-[700px] h-[100px] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] border border-[#D4AF37]/20 bg-black/90 backdrop-blur-xl">
         <tv-ticker-tape
-          symbols="FX:EURUSD,BITSTAMP:BTCUSD,BITSTAMP:ETHUSD,CMCMARKETS:GOLD,FX:USDHKD,FX_IDC:CNYHKD,OANDA:AUDHKD,OANDA:CADHKD,OANDA:GBPHKD"
-          color-theme="dark"
+          symbols="FX:USDHKD,AUDHKD"
+          hide-chart
+          item-size="compact"
+          locale="zh_TW"
           theme="dark"
-          transparent="true"
-          display-mode="compact"
-          style={{ width: '100%', height: '100%' }}
         ></tv-ticker-tape>
       </div>
     </div>
